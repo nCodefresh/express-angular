@@ -9,7 +9,6 @@ steps:
 #        - echo short ${{CF_SHORT_REVISION}}
 #        - echo long ${{CF_REVISION}}
 
-
   build-project:
     type: build
     working-directory: ${{initial-clone}}
@@ -17,7 +16,6 @@ steps:
     image-name: ncodefresh/express-angular-test
     dockerfile: Dockerfile
     tag: ${{CF_SHORT_REVISION}}
-
 
 #  push-to-dockerhub:
 #    type: push
