@@ -17,6 +17,11 @@ steps:
     dockerfile: Dockerfile
     tag: ${{CF_SHORT_REVISION}}
 
+  launch-environment:
+    image: codefreshio/cf-cli:latest
+    commands:
+        - node index.js login --token ${{TOKEN}} -u ${{USER}}
+
 #  push-to-dockerhub:
 #    type: push
 #    candidate: ${{build-project}}
