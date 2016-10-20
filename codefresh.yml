@@ -21,7 +21,7 @@ steps:
     image: codefreshio/cf-cli:latest
     commands:
         - node index.js login --token ${{TOKEN}} -u ${{USER}}
-
+        - node index.js compositions run --id ${{ID_COMPOSITION}}
 #  push-to-dockerhub:
 #    type: push
 #    candidate: ${{build-project}}
