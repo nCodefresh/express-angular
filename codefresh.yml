@@ -17,7 +17,6 @@ steps:
     dockerfile: Dockerfile
     tag: ${{CF_SHORT_REVISION}}
 
-
   launch-environment:
     image: codefreshio/cf-cli:latest
     commands:
