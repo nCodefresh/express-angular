@@ -2,13 +2,6 @@ version: '1.0'
 
 steps:
 
-#  generate-tag:
-#    image: node:latest
-#    working-directory: ${{initial-clone}}
-#    commands:
-#        - echo short ${{CF_SHORT_REVISION}}
-#        - echo long ${{CF_REVISION}}
-
   build-project:
     type: build
     working-directory: ${{initial-clone}}
@@ -17,11 +10,20 @@ steps:
     dockerfile: Dockerfile
     tag: ${{CF_SHORT_REVISION}}
 
-#  launch-environment:
-#    image: codefreshio/cf-cli:latest
-#    commands:
-#        - node index.js login --token ${{TOKEN}} -u ${{USER}}
-#        - node index.js compositions run --id ${{ID_COMPOSITION}}
+  launch-env:
+      type: launch-composition
+      composition: 'express-angular'
+      environmentName: 'new-launch-env'
+
+  inline-composition:
+      type: launch-composition
+      composition:
+        version: '2'
+        services:
+          db:
+            image: ${{build-step}}
+            ports:
+             - 9000
 
   push-to-dockerhub:
     type: push
