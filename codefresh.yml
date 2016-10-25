@@ -18,22 +18,9 @@ steps:
   inline-composition:
       type: launch-composition
       composition:
-        version: '2'
+        version: '2.0'
         services:
           db:
             image: ${{build-step}}
             ports:
              - 9000
-
-  build-step:
-    type: build
-    working-directory: ${{initial-clone}}
-    description: codefresh example
-    image-name: ncodefresh/express-angular-test
-    dockerfile: Dockerfile
-    tag: ${{CF_SHORT_REVISION}}
-
-  push-to-dockerhub:
-    type: push
-    candidate: ${{build-project}}
-    tag: ${{CF_SHORT_REVISION}}
