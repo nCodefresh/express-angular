@@ -2,13 +2,13 @@ version: '1.0'
 
 steps:
 
-  build-project:
-    type: build
-    working-directory: ${{initial-clone}}
-    description: codefresh example
-    image-name: ncodefresh/express-angular-test
-    dockerfile: Dockerfile
-    tag: ${{CF_SHORT_REVISION}}
+#  build-step:
+#    type: build
+#    working-directory: ${{initial-clone}}
+#    description: codefresh example
+#    image-name: ncodefresh/express-angular-test
+#    dockerfile: Dockerfile
+#    tag: ${{CF_SHORT_REVISION}}
 
   launch-env:
       type: launch-composition
@@ -24,6 +24,14 @@ steps:
             image: ${{build-step}}
             ports:
              - 9000
+
+  build-step:
+    type: build
+    working-directory: ${{initial-clone}}
+    description: codefresh example
+    image-name: ncodefresh/express-angular-test
+    dockerfile: Dockerfile
+    tag: ${{CF_SHORT_REVISION}}
 
   push-to-dockerhub:
     type: push
