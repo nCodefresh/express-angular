@@ -2,25 +2,12 @@ version: '1.0'
 
 steps:
 
-  build-step:
-    type: build
-    working-directory: ${{initial-clone}}
-    description: codefresh example
-    image-name: ncodefresh/express-angular-test
-    dockerfile: Dockerfile
-    tag: ${{CF_SHORT_REVISION}}
+  auto-gen-private-img:
+    image: codefreshio/yaml-node-1
+    commands:
+        - echo private img
 
-  launch-env:
-      type: launch-composition
-      composition: 'express-angular'
-      environmentName: 'new-launch-env'
-
-  inline-composition:
-      type: launch-composition
-      composition:
-        version: '2.0'
-        services:
-          db:
-            image: ${{build-step}}
-            ports:
-             - 9000
+  auto-gen-public-img:
+    image: codefreshio/git-image
+    commands:
+        - echo public img
