@@ -6,6 +6,7 @@ steps:
     image: codefreshio/yaml-node-1
     commands:
         - echo private img
+    fail-fast: false
 
   auto-gen-public-img:
     image: codefreshio/git-image
