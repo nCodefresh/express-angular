@@ -10,6 +10,7 @@ steps:
     dockerfile: Dockerfile
     fail-fast: false
     tag: ${{CF_SHORT_REVISION}}
+    123-2: word
     build-arguments:
       - key=value
     on-fail: echo fail
