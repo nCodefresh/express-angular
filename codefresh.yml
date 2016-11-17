@@ -10,7 +10,7 @@ steps:
     tag: ${{CF-BRANCH}}
     when:
       branch:
-        only:
+        only-тфьу:
           - [name-literals]
 #        ignore:
 #          - name-literals
