@@ -30,6 +30,7 @@ steps:
   composition-step:
       description: Attempting to run as part of composition.
       type: composition
+      fail-fast: false
       composition:
         version: '2'
         services:
