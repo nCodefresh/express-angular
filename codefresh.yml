@@ -17,7 +17,7 @@ steps:
 
   freestyle-step:
     image: node:latest
-    title: qwerty ajsjfj djfjf \ \n jjf \\n djaksd \t
+    title: 'qwerty ajsjfj djfjf \ \n jjf \\n djaksd \t
     working-directory: ${{initial-clone}}
     environment:
       - TEST-A=test
@@ -33,7 +33,7 @@ steps:
           master-Branch: '"${{CF_BRANCH}}" == "master"'
 
   composition-step:
-      titles: asd dgfhfj skdkd fsdf
+      title: "asd dgfhfj skdkd fsdf
       description: Attempting to run as part of composition.
       type: composition
       fail-fast: false
@@ -59,7 +59,7 @@ steps:
             notFeatureBranch: 'match("${{CF_BRANCH}}", "^FB-", true) == false'
 
   123 push_step:
-    title: yturi dhfjg
+    title: yturi "dhfjg
     description: Pushing image to Docker hub.
     type: push
     candidate: ${{build_prj}}
@@ -70,7 +70,7 @@ steps:
         ignore: [master, develop]
 
   launch-compose:
-    title: ryutit nfhdjg iuyo
+    title: ryutit "nfhdjg"#$ `iuyo$ #sdf
     type: launch-composition
     when:
       branch:
