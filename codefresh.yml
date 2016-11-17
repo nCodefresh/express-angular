@@ -5,12 +5,13 @@ steps:
     type: build
     title: 123 сборка
     description: UC - build step
-    image-name: codefreshio/yaml-example
+    image_name: codefreshio/yaml-example
     dockerfile: Dockerfile
     working-directory: ${{initial-clone}}
     tag: ${{CF-BRANCH}}
     when:
       branch:
+        only:
           - [name-literals]
 #        ignore:
 #          - name-literals
