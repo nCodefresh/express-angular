@@ -1,29 +1,75 @@
 version: '1.0'
 
 steps:
-
-#  generate-tag:
-#    image: node:latest
-#    working-directory: ${{initial-clone}}
-#    commands:
-#        - echo short ${{CF_SHORT_REVISION}}
-#        - echo long ${{CF_REVISION}}
-
-  build-project:
+  build-prj:
     type: build
-    working-directory: ${{initial-clone}}
-    description: codefresh example
-    image-name: ncodefresh/express-angular-test
+    description: UC - build step
+    image-name: codefreshio/yaml-example
     dockerfile: Dockerfile
-    tag: ${{CF_SHORT_REVISION}}
+    working-directory: ${{initial-clone}}
+    tag: ${{CF-BRANCH}}
+    when:
+      branch:
+        only:
+          - condition-step
+        ignore:
+          - condition-step2
 
-#  launch-environment:
-#    image: codefreshio/cf-cli:latest
-#    commands:
-#        - node index.js login --token ${{TOKEN}} -u ${{USER}}
-#        - node index.js compositions run --id ${{ID_COMPOSITION}}
+  freestyle-step:
+    image: node:latest
+    working-directory: ${{initial-clone}}
+    commands:
+        - npm -v
+    when:
+      condition:
+        all:
+          name: "'${{CF_BRANCH}}' == 'condition-step'"
+          noSkipCiIn-CommitMessage: 'includes(lower("${{CF_COMMIT_MESSAGE}}"), "skip ci") == false'
+          master-Branch: '"${{CF_BRANCH}}" == "master"'
 
-  push-to-dockerhub:
+  composition-step:
+      description: Attempting to run as part of composition.
+      type: composition
+      composition:
+        version: '2'
+        services:
+          app-name:
+            image: 'advance512demo/demochat:master'
+            ports:
+              - 5000
+            depends_on:
+              - mongo-db
+          mongo-db:
+            image: mongo
+      composition-candidates:
+        main:
+          image: nhoag/curl
+          command: bash -c "sleep 20 && curl http://app:5000/" | echo 'works'
+      when:
+        condition:
+          any:
+            noSkipCi-InCommitMessage: 'includes(lower("${{CF_COMMIT_MESSAGE}}"), "skip ci") == false'
+            notFeatureBranch: 'match("${{CF_BRANCH}}", "^FB-", true) == false'
+
+  push_step:
+    description: Pushing image to Docker hub.
     type: push
-    candidate: ${{build-project}}
-    tag: ${{CF_SHORT_REVISION}}
+    candidate: ${{build_prj}}
+    tag: ${{CF_BRANCH}}
+    fail-fast: false
+    when:
+      branch:
+        ignore: [master, develop]
+
+  launch-compose:
+    type: launch-composition
+    when:
+      branch:
+        ignore: [ master, other]
+    composition:
+        version: '2'
+        services:
+          app-name:
+            image: ${{build-prj}}
+            ports:
+              - 3000
