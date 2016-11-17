@@ -17,7 +17,7 @@ steps:
 
   freestyle-step:
     image: node:latest
-    title: 'qwerty ajsjfj 'djfjf \ \n jjf \\n djaksd \t'
+    title: 'qwerty ajsjfj djfjf \ \n jjf \\n djaksd \t'
     working-directory: ${{initial-clone}}
     environment:
       - TEST-A=test
