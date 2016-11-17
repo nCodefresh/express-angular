@@ -46,8 +46,8 @@ steps:
             ports:
               - 5000
             depends_on:
-              - mongo-db
-          mongo-db:
+              - mongodb
+          mongodb:
             image: mongo
       composition_candidates:
         main:
@@ -81,6 +81,6 @@ steps:
         version: '2'
         services:
           app-name:
-            image: ${{build-prj}}
+            image: ${{build_prj}}
             ports:
               - 3000
