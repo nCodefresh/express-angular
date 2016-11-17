@@ -5,7 +5,7 @@ steps:
     type: build
     title: 123 сборка
     description: UC - build step
-    image_name: codefreshio/yaml-example
+    image_name: codefreshio/yaml-example-test
     dockerfile: Dockerfile
     working_directory: ${{initial_clone}}
     tag: ${{CF-BRANCH}}
