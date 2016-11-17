@@ -51,7 +51,7 @@ steps:
             noSkipCi-InCommitMessage: 'includes(lower("${{CF_COMMIT_MESSAGE}}"), "skip ci") == false'
             notFeatureBranch: 'match("${{CF_BRANCH}}", "^FB-", true) == false'
 
-  push_step:
+  123 push_step:
     description: Pushing image to Docker hub.
     type: push
     candidate: ${{build_prj}}
