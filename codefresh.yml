@@ -7,7 +7,7 @@ steps:
     description: UC - build step
     image_name: codefreshio/yaml-example-test
     dockerfile: Dockerfile
-    working_directory: ${{initial_clone}}
+    working_directory: ${{initial-clone}}
     tag: ${{CF-BRANCH}}
     when:
       branch:
@@ -29,9 +29,9 @@ steps:
     when:
       condition:
         all:
-          name: "'${{CF_BRANCH}}' == 'condition-step'"
+          name: "'${{CF_BRANCH}}' != 'condition-step'"
           noSkipCiInCommitMessage: 'includes(lower("${{CF_COMMIT_MESSAGE}}"), "skip ci") == false'
-          masterBranch: '"${{CF_BRANCH}}" == "master"'
+          masterBranch: '"${{CF_BRANCH}}" != "master"'
 
   composition_step:
       title: "asd dgfhfj skdkd fsdf"
