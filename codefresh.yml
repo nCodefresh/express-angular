@@ -11,9 +11,9 @@ steps:
     when:
       branch:
         only:
-          - condition-step
+          - [name-literals]
         ignore:
-          - condition-step2
+          - name-literals
 
   freestyle-step:
     image: node:latest
