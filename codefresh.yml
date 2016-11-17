@@ -1,13 +1,13 @@
 version: '1.0'
 
 steps:
-  build-prj:
+  build_prj:
     type: build
     title: 123 сборка
     description: UC - build step
     image_name: codefreshio/yaml-example
     dockerfile: Dockerfile
-    working_directory: ${{initial-clone}}
+    working_directory: ${{initial_clone}}
     tag: ${{CF-BRANCH}}
     when:
       branch:
@@ -19,7 +19,7 @@ steps:
   freestyle_step:
     image: node:latest
     title: 'qwerty ajsjfj djfjf \ \n jjf \\n djaksd \t'
-    working-directory: ${{initial-clone}}
+    working-directory: ${{initial_clone}}
     environment:
       - TEST-A=test
     commands:
@@ -33,7 +33,7 @@ steps:
           noSkipCiInCommitMessage: 'includes(lower("${{CF_COMMIT_MESSAGE}}"), "skip ci") == false'
           masterBranch: '"${{CF_BRANCH}}" == "master"'
 
-  composition-step:
+  composition_step:
       title: "asd dgfhfj skdkd fsdf"
       description: Attempting to run as part of composition.
       type: composition
@@ -56,7 +56,7 @@ steps:
       when:
         condition:
           any:
-            noSkipCi-InCommitMessage: 'includes(lower("${{CF_COMMIT_MESSAGE}}"), "skip ci") == false'
+            noSkipCiInCommitMessage: 'includes(lower("${{CF_COMMIT_MESSAGE}}"), "skip ci") == false'
             notFeatureBranch: 'match("${{CF_BRANCH}}", "^FB-", true) == false'
 
   push_step:
