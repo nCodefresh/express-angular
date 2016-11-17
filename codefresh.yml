@@ -17,7 +17,7 @@ steps:
 #          - name-literals
 
   freestyle_step:
-    image: node:latest
+    image: codefreshio/staticweb
     title: 'qwerty ajsjfj djfjf \ \n jjf \\n djaksd \t'
     working_directory: ${{initial_clone}}
     fail-fast: false
