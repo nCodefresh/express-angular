@@ -73,6 +73,7 @@ steps:
   launch-compose:
     title: ryutit "nfhdjg"#$ `iuyo$ #sdf
     type: launch-composition
+    environmentName: ENV-test
     when:
       branch:
         ignore: [ master, other]
