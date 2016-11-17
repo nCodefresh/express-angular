@@ -12,8 +12,8 @@ steps:
       branch:
         only:
           - [name-literals]
-        ignore:
-          - name-literals
+#        ignore:
+#          - name-literals
 
   freestyle-step:
     image: node:latest
