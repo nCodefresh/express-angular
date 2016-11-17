@@ -17,8 +17,12 @@ steps:
   freestyle-step:
     image: node:latest
     working-directory: ${{initial-clone}}
+    environment:
+      - TEST-A=test
     commands:
         - npm -v
+        - echo $TEST-A
+        - echo ${{TEST-A}}
     when:
       condition:
         all:
