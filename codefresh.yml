@@ -2,12 +2,14 @@ version: '1.0'
 
 steps:
 
-#  generate-tag:
-#    image: node:latest
-#    working-directory: ${{initial-clone}}
-#    commands:
-#        - echo short ${{CF_SHORT_REVISION}}
-#        - echo long ${{CF_REVISION}}
+  generate-tag:
+    image: node:latest
+    working-directory: ${{initial-clone}}
+    commands:
+        - echo short ${{CF_SHORT_REVISION}}
+        - echo long ${{CF_REVISION}}
+        - echo test ${{test}}
+        - echo test1 ${{test1}}
 
   build-project:
     type: build
