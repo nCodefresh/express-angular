@@ -9,6 +9,7 @@ steps:
 #        - echo short ${{CF_SHORT_REVISION}}
 #        - echo long ${{CF_REVISION}}
 
+
   build-project:
     type: build
     working-directory: ${{initial-clone}}
