@@ -11,6 +11,7 @@ steps:
         - echo test ${{test}}
         - echo test1 ${{test1}}
 
+
   build-project:
     type: build
     working-directory: ${{initial-clone}}
