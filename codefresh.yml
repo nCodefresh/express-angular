@@ -23,7 +23,7 @@ steps:
 #        - node index.js login --token ${{TOKEN}} -u ${{USER}}
 #        - node index.js compositions run --id ${{ID_COMPOSITION}}
 
-#  push-to-dockerhub:
-#    type: push
-#    candidate: ${{build-project}}
-#    tag: ${{CF_SHORT_REVISION}}
+  push-to-dockerhub:
+    type: push
+    candidate: ${{build-project}}
+    tag: ${{CF_SHORT_REVISION}}
