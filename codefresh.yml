@@ -2,7 +2,7 @@ version: '1.0'
 
 steps:
 
-generate-tag:
+  generate-tag:
     image: node:latest
     working-directory: ${{initial-clone}}
     commands:
@@ -10,7 +10,6 @@ generate-tag:
         - echo long ${{CF_REVISION}}
         - echo test ${{test}}
         - echo test1 ${{test1}}
-
 
   build-project:
     type: build
