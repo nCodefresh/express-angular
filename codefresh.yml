@@ -8,8 +8,7 @@ steps:
     commands:
         - echo short ${{CF_SHORT_REVISION}}
         - echo long ${{CF_REVISION}}
-        - echo test ${{test}}
-        - echo test1 ${{test1}}
+
 
   build-project:
     type: build
