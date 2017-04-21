@@ -5,9 +5,9 @@ steps:
     image: node:latest
     working-directory: ${{main_clone}}
     commands:
-        - ls -a
-        - pwd
-
+      - ls -a
+      - pwd
+      - npm install
 
   build_project:
     type: build
