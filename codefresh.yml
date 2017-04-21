@@ -8,6 +8,7 @@ steps:
         - ls -a
         - pwd
 
+
   build_project:
     type: build
     description: codefresh example
