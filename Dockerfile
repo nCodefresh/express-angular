@@ -1,17 +1,13 @@
-FROM node:latest
+FROM node:7.2.1
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+# Copy application files
+COPY ./build /app
+RUN mkdir app/node_modules
 
-COPY package.json /usr/src/app/
-RUN npm install --silent
+RUN echo "whats in app: " && ls -a app && pwd
 
-RUN ls -a && pwd
+COPY ./node_modules /app/node_modules
 
-COPY . /usr/src/app
+RUN echo "whats in app: " && ls -a app && pwd
 
-RUN test execute
 
-EXPOSE 9000
-
-CMD [ "npm", "start" ]
