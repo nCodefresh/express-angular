@@ -12,6 +12,7 @@ steps:
   build_project:
     type: build
     description: codefresh example
+    working_directory: ${{main_clone}}
     image-name: ncodefresh/express-angular-test
     dockerfile: Dockerfile
     tag: '${{CF_SHORT_REVISION}}'
