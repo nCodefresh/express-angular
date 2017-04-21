@@ -1,7 +1,7 @@
 FROM node:7.2.1
 
 # Copy application files
-COPY ./build /app
+#COPY ./build /app
 RUN mkdir app/node_modules
 
 RUN echo "whats in app: " && ls -a app && pwd
