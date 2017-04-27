@@ -19,7 +19,7 @@ steps:
 
   push-to-dockerhub:
     type: push
-    candidate: ${{build-project}}
+    candidate: ${{build_project}}
     tag: latest
     credentials:
       username: ${{user}}
