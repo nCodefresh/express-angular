@@ -13,7 +13,7 @@ steps:
     type: build
     description: codefresh example
     working_directory: ${{main_clone}}
-    image-name: codefreshio/express-angular-test
+    image-name: ncodefresh/express-angular-test
     dockerfile: Dockerfile
     tag: codefresh
 
