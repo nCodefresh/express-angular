@@ -1,26 +1,26 @@
 version: '1.0'
 steps:
 
-  generate-tag:
-    image: node:latest
-    working-directory: ${{main_clone}}
-    commands:
-      - ls -a
-      - pwd
-      - npm install
+#  generate-tag:
+#    image: node:latest
+#    working-directory: ${{main_clone}}
+#    commands:
+#      - ls -a
+#      - pwd
+#      - npm install
 
   build_project:
     type: build
     description: codefresh example
     working_directory: ${{main_clone}}
-    image-name: ncodefresh/express-angular-test
+    image-name: codefreshio/express-angular-test
     dockerfile: Dockerfile
-    tag: '${{CF_SHORT_REVISION}}'
+    tag: codefresh
 
-#  push-to-dockerhub:
-#    type: push
-#    candidate: ${{build-project}}
-#    tag: ${{CF_SHORT_REVISION}}
-#    credentials:
-#      username: ${{user}}
-#      password: ${{pass}}
+  push-to-dockerhub:
+    type: push
+    candidate: ${{build-project}}
+    tag: latest
+    credentials:
+      username: ${{user}}
+      password: ${{pass}}
