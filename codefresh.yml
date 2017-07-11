@@ -5,7 +5,7 @@ steps:
     image: node:latest
     working-directory: ${{main_clone}}
     commands:
-      - cf_export TAG=qwerty
+      - cf_export TAG='qwerty=we'
 
   build_project:
     type: build
