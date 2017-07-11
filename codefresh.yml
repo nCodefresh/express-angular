@@ -14,7 +14,7 @@ steps:
     working_directory: ${{main_clone}}
     image-name: ncodefresh/express-angular-test
     dockerfile: Dockerfile
-    tag: ${{CF_BRANCH_NORMALIZED}}
+    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
 
 #  push-to-dockerhub1:
 #    type: push
