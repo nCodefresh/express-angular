@@ -1,13 +1,11 @@
 version: '1.0'
 steps:
 
-#  generate-tag:
-#    image: node:latest
-#    working-directory: ${{main_clone}}
-#    commands:
-#      - ls -a
-#      - pwd
-#      - npm install
+  generate-tag:
+    image: node:latest
+    working-directory: ${{main_clone}}
+    commands:
+      - cf_export TAG=qwerty
 
   build_project:
     type: build
@@ -20,7 +18,5 @@ steps:
   push-to-dockerhub:
     type: push
     candidate: ${{build_project}}
-    tag: latest
-    credentials:
-      username: ${{user}}
-      password: ${{pass}}
+    registry: docker-hub
+    tag: ${{TAG}}
