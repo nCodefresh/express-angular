@@ -8,7 +8,7 @@ steps:
 #      - cf_export TAG='qwerty=we'
 #      - cat file.env >> /codefresh/volume/env_vars_to_export
 
-  build_project:
+  build_step:
     type: build
     description: codefresh example
     working_directory: ${{main_clone}}
@@ -16,6 +16,21 @@ steps:
     dockerfile: Dockerfile
     tag: ${{CF_BRANCH_TAG_NORMALIZED}}
 
+  unit_test:
+    image: '${{build_step}}'
+    working_directory: IMAGE_WORK_DIR
+    commands:
+      - echo test
+    on_success:
+      metadata:
+        set:
+          - '${{build_step.imageId}}':
+              - CF_QUALITY: true
+    on_fail:
+      metadata:
+        set:
+          - '${{build_step.imageId}}':
+              - CF_QUALITY: false
 #  push-to-dockerhub1:
 #    type: push
 #    candidate: ${{build_project}}
