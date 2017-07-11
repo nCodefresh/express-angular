@@ -16,13 +16,13 @@ steps:
     dockerfile: Dockerfile
     tag: ${{TAG}}
 
-  push-to-dockerhub:
+  push-to-dockerhub1:
     type: push
     candidate: ${{build_project}}
     registry: docker-hub
     tag: ${{TAG1}}
 
-  push-to-dockerhub:
+  push-to-dockerhub2:
     type: push
     candidate: ${{build_project}}
     registry: docker-hub
