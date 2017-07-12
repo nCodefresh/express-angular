@@ -1,12 +1,11 @@
 version: '1.0'
 steps:
-
-#  generate-tag:
-#    image: node:latest
-#    working-directory: ${{main_clone}}
-#    commands:
-#      - cf_export TAG='qwerty=we'
-#      - cat file.env >> /codefresh/volume/env_vars_to_export
+  generate-tag:
+    image: node:latest
+    working-directory: ${{main_clone}}
+    commands:
+      - cf_export TAG=qwerty=we
+      - cat file.env >> /codefresh/volume/env_vars_to_export
 
   build_step:
     type: build
@@ -14,13 +13,13 @@ steps:
     working_directory: ${{main_clone}}
     image-name: ncodefresh/express-angular-test
     dockerfile: Dockerfile
-    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+    tag: ${{TAG}}
 
   unit_test:
     image: '${{build_step}}'
     working_directory: IMAGE_WORK_DIR
     commands:
-      - echo test
+      - echo ${{TAG}}
     on_success:
       metadata:
         set:
@@ -31,14 +30,9 @@ steps:
         set:
           - '${{build_step.imageId}}':
               - CF_QUALITY: false
-#  push-to-dockerhub1:
-#    type: push
-#    candidate: ${{build_project}}
-#    registry: docker-hub
-#    tag: ${{TAG1}}
-#
-#  push-to-dockerhub2:
-#    type: push
-#    candidate: ${{build_project}}
-#    registry: docker-hub
-#    tag: ${{CF_BRANCH}}
+
+  push-to-dockerhub:
+    type: push
+    candidate: ${{build_step}}
+    registry: docker-hub
+    tag: ${{TAG}}
