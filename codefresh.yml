@@ -35,8 +35,15 @@ steps:
           - '${{build_step.imageId}}':
               - CF_QUALITY: false
 
+  freestyle-step-3:
+    description: Freestyle step..
+    title: Free styling 3
+    image: nhoag/curl
+    commands:
+      - curl http://$TEST/index.php
+
   push-to-dockerhub:
     type: push
     candidate: ${{build_step}}
     registry: docker-hub
-    tag: ${{SOME_VAR}}
+    tag: ${{TAG}}
