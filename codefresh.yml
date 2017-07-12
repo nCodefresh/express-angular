@@ -5,7 +5,7 @@ steps:
     working-directory: ${{main_clone}}
     commands:
       - cf_export TAG=qwerty=we
-      #- cat file.env >> /codefresh/volume/env_vars_to_export
+      - cat SOME_VAR=test >> /codefresh/volume/env_vars_to_export
 
   build_step:
     type: build
@@ -13,7 +13,7 @@ steps:
     working_directory: ${{main_clone}}
     image-name: ncodefresh/express-angular-test
     dockerfile: Dockerfile
-    tag: ${{TAG}}
+    tag: ${{SOME_VAR}}
 
   unit_test:
     image: '${{build_step}}'
