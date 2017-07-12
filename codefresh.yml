@@ -22,7 +22,7 @@ steps:
     commands:
       - echo ${{TAG}}
       - echo ${{TAG1}}
-      - echo ${{SOME_VAR}}
+      - echo ${{TEST1}}
       - echo $TEST
     on_success:
       metadata:
