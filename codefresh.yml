@@ -42,6 +42,35 @@ steps:
     commands:
       - curl http://$TEST/index.php
 
+  unit_test:
+    type: composition
+    working_directory: ${{main_clone}}
+    composition:
+      version: '2'
+      services:
+        db:
+          image: mysql:latest
+          ports:
+            - 3306
+          volumes:
+            - ./data:/var/lib/mysql
+          environment:
+            - MYSQL_ROOT_PASSWORD=admin
+            - MYSQL_USER=test
+            - MYSQL_PASSWORD=admin
+            - MYSQL_DATABASE=my_db
+    composition_candidates:
+        test:
+          image: ${{build_step}}
+          links:
+            - db
+          command: bash -c '/usr/src/app/test-script.sh'
+          environment:
+            - MYSQL_ROOT_PASSWORD=admin
+            - MYSQL_USER=test
+            - MYSQL_PASSWORD=admin
+            - MYSQL_DATABASE=my_db
+            - MYSQL_HOST=db
   push-to-dockerhub:
     type: push
     candidate: ${{build_step}}
