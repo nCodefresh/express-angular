@@ -17,32 +17,6 @@ steps:
     tag: ${{TAG2}}
 
   unit_test:
-    image: '${{build_step}}'
-    working_directory: IMAGE_WORK_DIR
-    commands:
-      - echo ${{TAG}}
-      - echo ${{TAG1}}
-      - echo ${{TEST1}}
-      - echo $TEST
-    on_success:
-      metadata:
-        set:
-          - '${{build_step.imageId}}':
-              - CF_QUALITY: true
-    on_fail:
-      metadata:
-        set:
-          - '${{build_step.imageId}}':
-              - CF_QUALITY: false
-
-  freestyle-step-3:
-    description: Freestyle step..
-    title: Free styling 3
-    image: nhoag/curl
-    commands:
-      - curl http://$TEST/index.php
-
-  unit_test:
     type: composition
     working_directory: ${{main_clone}}
     composition:
@@ -50,6 +24,8 @@ steps:
       services:
         db:
           image: mysql:latest
+          command:
+            - echo $TEST
           ports:
             - 3306
           volumes:
@@ -59,20 +35,8 @@ steps:
             - MYSQL_USER=test
             - MYSQL_PASSWORD=admin
             - MYSQL_DATABASE=my_db
-    composition_candidates:
-        test:
-          image: ${{build_step}}
-          links:
-            - db
-          command: bash -c '/usr/src/app/test-script.sh'
-          environment:
-            - MYSQL_ROOT_PASSWORD=admin
-            - MYSQL_USER=test
-            - MYSQL_PASSWORD=admin
-            - MYSQL_DATABASE=my_db
-            - MYSQL_HOST=db
-  push-to-dockerhub:
-    type: push
-    candidate: ${{build_step}}
-    registry: docker-hub
-    tag: ${{TAG}}
+#  push-to-dockerhub:
+#    type: push
+#    candidate: ${{build_step}}
+#    registry: docker-hub
+#    tag: ${{TAG}}
