@@ -5,7 +5,7 @@ steps:
     working-directory: ${{main_clone}}
     commands:
       - cf_export TAG=qwerty=we TAG1='kskd=sd' TAG2=fhgjd
-      - echo SOME_VAR=test#//\\4sd TEST=1234 >> /codefresh/volume/env_vars_to_export
+      - echo SOME_VAR="test#//\\4sd" TEST=1234 >> /codefresh/volume/env_vars_to_export
 
   build_step:
     type: build
