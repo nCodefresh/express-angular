@@ -1,5 +1,9 @@
 FROM node:latest
 
+ARG arg
+
+RUN echo $arg
+
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 

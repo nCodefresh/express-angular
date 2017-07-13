@@ -4,7 +4,7 @@ steps:
     image: node:latest
     working-directory: ${{main_clone}}
     commands:
-      - cf_export TAG=qwerty=we TAG1='kskd=sd' TAG2=fhgjd
+      - cf_export TAG=qwerty=we TAG1='kskd=sd' TAG2=fhgjd USERNAME=ncodefresh
       - echo TEST=123456789 >> /codefresh/volume/env_vars_to_export
       - echo TEST1=12345678910 >> /codefresh/volume/env_vars_to_export
 
@@ -12,9 +12,11 @@ steps:
     type: build
     description: codefresh example
     working_directory: ${{main_clone}}
-    image-name: ncodefresh/express-angular-test
+    image-name: $USERNAME/express-angular-test
     dockerfile: Dockerfile
     tag: ${{TAG2}}
+    build_arguments:
+      - arg=$TEST
 
   unit_test:
     type: composition
@@ -26,8 +28,6 @@ steps:
           image: mysql:latest
           ports:
             - 3306
-          volumes:
-            - ./data:/var/lib/mysql
           environment:
             - MYSQL_ROOT_PASSWORD=admin
             - MYSQL_USER=test
@@ -36,9 +36,10 @@ steps:
     composition_candidates:
         test:
           image: node
+          command: echo $TEST1
 
-#  push-to-dockerhub:
-#    type: push
-#    candidate: ${{build_step}}
-#    registry: docker-hub
-#    tag: ${{TAG}}
+  push-to-dockerhub:
+    type: push
+    candidate: ${{build_step}}
+    registry: docker-hub
+    tag: $TAG
