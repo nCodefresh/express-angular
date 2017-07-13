@@ -18,7 +18,7 @@ steps:
     build_arguments:
       - arg=${{TEST}}
 
-  generate-tag:
+  generate-tag-1:
       image: node:latest
       working-directory: ${{main_clone}}
       commands:
