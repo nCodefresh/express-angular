@@ -4,41 +4,9 @@ steps:
     image: node:latest
     working-directory: ${{main_clone}}
     commands:
-      - cf_export TAG=qwerty=we TAG1='kskd=sd' TAG2=fhgjd
-      - echo TEST=123456789 >> /codefresh/volume/env_vars_to_export
-      - echo TEST1=12345678910 >> /codefresh/volume/env_vars_to_export
-
-  build_step:
-    type: build
-    description: codefresh example
-    working_directory: ${{main_clone}}
-    image-name: ncodefresh/express-angular-test
-    dockerfile: Dockerfile
-    tag: ${{TAG2}}
-
-  unit_test:
-    type: composition
-    working_directory: ${{main_clone}}
-    composition:
-      version: '2'
-      services:
-        db:
-          image: mysql:latest
-          ports:
-            - 3306
-          volumes:
-            - ./data:/var/lib/mysql
-          environment:
-            - MYSQL_ROOT_PASSWORD=admin
-            - MYSQL_USER=test
-            - MYSQL_PASSWORD=admin
-            - MYSQL_DATABASE=my_db
-    composition_candidates:
-        test:
-          image: node
-
-#  push-to-dockerhub:
-#    type: push
-#    candidate: ${{build_step}}
-#    registry: docker-hub
-#    tag: ${{TAG}}
+      - echo test
+    when:
+      condition:
+        all:
+          skip_tests_in_commit_message: |
+              includes(lower("${{CF_COMMIT_MESSAGE}}"), "cf-skip-tests") == false
