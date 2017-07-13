@@ -51,4 +51,4 @@ steps:
     type: push
     candidate: ${{build_step}}
     registry: docker-hub
-    tag: ${{TAG}}
+    tag: ${{TAG2}}
