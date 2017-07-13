@@ -4,7 +4,7 @@ steps:
     image: node:latest
     working-directory: ${{main_clone}}
     commands:
-      - cf_export TAG=qwerty=we TAG1='kskd=sd' TAG2=fhgjd USERNAME=ncodefresh
+      - cf_export TAG=qwerty=we TAG1='kskd=sd' TAG2=fhgjd USERNAME=ncodefresh 123=124
       - echo TEST=123456789 >> /codefresh/volume/env_vars_to_export
       - echo TEST1=12345678910 >> /codefresh/volume/env_vars_to_export
 
@@ -17,6 +17,15 @@ steps:
     tag: ${{TAG2}}
     build_arguments:
       - arg=${{TEST}}
+
+  generate-tag:
+      image: node:latest
+      working-directory: ${{main_clone}}
+      commands:
+        - echo $TEST
+        - echo $TAG
+        - echo $TEST1
+        - echo $123
 
   unit_test:
     type: composition
@@ -42,4 +51,4 @@ steps:
     type: push
     candidate: ${{build_step}}
     registry: docker-hub
-    tag: $TAG
+    tag: ${{TAG}}
