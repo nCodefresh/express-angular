@@ -16,7 +16,7 @@ steps:
     dockerfile: Dockerfile
     tag: ${{TAG2}}
     build_arguments:
-      - arg=$TEST
+      - arg=${{TEST}}
 
   unit_test:
     type: composition
