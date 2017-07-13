@@ -2,6 +2,7 @@ version: '1.0'
 steps:
 
 
+
   generate-tag:
     image: node:latest
     working-directory: ${{main_clone}}
