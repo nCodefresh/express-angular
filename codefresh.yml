@@ -1,14 +1,24 @@
 version: '1.0'
 steps:
 
+  build_project:
+    type: build
+    working_directory: ${{main_clone}}
+    image-name: ${{dockerhubUsername}}/express-angular-multiple-tags
+    dockerfile: Dockerfile
 
-  generate-tag:
-    image: node:latest
-    working-directory: ${{main_clone}}
-    commands:
-      - echo test
-    when:
-      condition:
-        all:
-          skip_tests_in_commit_message: |
-              includes(lower("${{CF_COMMIT_MESSAGE}}"), "cf-skip-tests") == false
+  push-to-dockerhub-1:
+    type: push
+    candidate: ${{build_project}}
+    credentials:
+      username: ${{dockerhubUsername}}
+      password: ${{dockerhubPassword}}
+    tag: tag1
+
+  push-to-dockerhub-2:
+    type: push
+    candidate: ${{build_project}}
+    credentials:
+      username: ${{dockerhubUsername}}
+      password: ${{dockerhubPassword}}
+    tag: tag2
