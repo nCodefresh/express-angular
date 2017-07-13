@@ -24,8 +24,6 @@ steps:
       services:
         db:
           image: mysql:latest
-          command:
-            - echo $TEST
           ports:
             - 3306
           volumes:
@@ -35,6 +33,10 @@ steps:
             - MYSQL_USER=test
             - MYSQL_PASSWORD=admin
             - MYSQL_DATABASE=my_db
+    composition_candidates:
+        test:
+          image: node
+
 #  push-to-dockerhub:
 #    type: push
 #    candidate: ${{build_step}}
