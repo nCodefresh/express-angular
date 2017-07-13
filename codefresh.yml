@@ -5,8 +5,3 @@ steps:
     working-directory: ${{main_clone}}
     commands:
       - echo test
-    when:
-      condition:
-        all:
-          skip_tests_in_commit_message: |
-              includes(lower("${{CF_COMMIT_MESSAGE}}"), "cf-skip-tests") == false
