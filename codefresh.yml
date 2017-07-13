@@ -22,10 +22,10 @@ steps:
       image: node:latest
       working-directory: ${{main_clone}}
       commands:
-        - echo $TEST
-        - echo $TAG
-        - echo $TEST1
-        - echo $123
+        - echo ${TEST}
+        - echo ${TAG}
+        - echo ${TEST1}
+        - echo ${123}
 
   unit_test:
     type: composition
@@ -45,7 +45,7 @@ steps:
     composition_candidates:
         test:
           image: node
-          command: echo $TEST1
+          command: echo ${{TEST1}}
 
   push-to-dockerhub:
     type: push
