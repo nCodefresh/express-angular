@@ -33,6 +33,7 @@ steps:
         - echo ${TEST1}
         - echo ${123}
         - echo ${TAG_ALPINE}
+        - echo ${TAG_ALPINE}
 
   unit_test:
     type: composition
