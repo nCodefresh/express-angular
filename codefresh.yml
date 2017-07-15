@@ -20,7 +20,7 @@ steps:
     working_directory: ${{main_clone}}
     image-name: ${{USERNAME}}/express-angular-test
     dockerfile: Dockerfile
-    tags: [${{TAG2}}, ${TAG_ALPINE}, qwerty]
+    tags: [ ${{TAG2}}, ${TAG_ALPINE}, qwerty ]
     build_arguments:
       - arg=${{TEST_APINE}}
 
@@ -39,4 +39,4 @@ steps:
     type: push
     candidate: ${{build_step}}
     registry: docker-hub
-    tags: [${{TAG2}}, ${TAG_ALPINE}, qwerty]
+    tags: [ ${{TAG2}}, ${TAG_ALPINE}, qwerty ]
