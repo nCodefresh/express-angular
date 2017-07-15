@@ -8,6 +8,12 @@ steps:
       - echo TEST=123456789 >> /codefresh/volume/env_vars_to_export
       - echo TEST1=12345678910 >> /codefresh/volume/env_vars_to_export
 
+  alpine-freestyle-step:
+      image: alpine
+      commands:
+        - cf_export TAG_ALPINE=alpine
+        - echo TEST_APINE=17 >> ${{CF_VOLUME_PATH}}/env_vars_to_export
+
   build_step:
     type: build
     description: codefresh example
@@ -16,7 +22,7 @@ steps:
     dockerfile: Dockerfile
     tag: ${{TAG2}}
     build_arguments:
-      - arg=${{TEST}}
+      - arg=${{TEST_APINE}}
 
   generate-tag-1:
       image: node:latest
@@ -26,6 +32,7 @@ steps:
         - echo ${TAG}
         - echo ${TEST1}
         - echo ${123}
+        - echo ${TAG_ALPINE}
 
   unit_test:
     type: composition
@@ -46,6 +53,8 @@ steps:
         test:
           image: node
           command: echo ${{TEST1}}
+
+
 
   push-to-dockerhub:
     type: push
