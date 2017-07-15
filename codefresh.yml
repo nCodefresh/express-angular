@@ -20,7 +20,6 @@ steps:
     working_directory: ${{main_clone}}
     image-name: ${{USERNAME}}/express-angular-test
     dockerfile: Dockerfile
-    tags: [ ${{TAG2}}, ${TAG_ALPINE}, qwerty ]
     build_arguments:
       - arg=${{TEST_APINE}}
 
