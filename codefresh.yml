@@ -20,7 +20,7 @@ steps:
     working_directory: ${{main_clone}}
     image-name: ${{USERNAME}}/express-angular-test
     dockerfile: Dockerfile
-    tag: ${{TAG2}}
+    tags: [${{TAG2}}, ${TAG_ALPINE}, qwerty]
     build_arguments:
       - arg=${{TEST_APINE}}
 
@@ -35,30 +35,8 @@ steps:
         - echo ${TAG_ALPINE}
         - echo ${TAG_ALPINE}
 
-  unit_test:
-    type: composition
-    working_directory: ${{main_clone}}
-    composition:
-      version: '2'
-      services:
-        db:
-          image: mysql:latest
-          ports:
-            - 3306
-          environment:
-            - MYSQL_ROOT_PASSWORD=admin
-            - MYSQL_USER=test
-            - MYSQL_PASSWORD=admin
-            - MYSQL_DATABASE=my_db
-    composition_candidates:
-        test:
-          image: node
-          command: echo ${{TEST1}}
-
-
-
   push-to-dockerhub:
     type: push
     candidate: ${{build_step}}
     registry: docker-hub
-    tag: ${{TAG2}}
+    tags: [${{TAG2}}, ${TAG_ALPINE}, qwerty]
