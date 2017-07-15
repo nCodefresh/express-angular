@@ -38,4 +38,4 @@ steps:
     type: push
     candidate: ${{build_step}}
     registry: docker-hub
-    tags: [ ${{TAG2}}, ${TAG_ALPINE}, qwerty ]
+    tags: [ ${TAG_ALPINE}, qwerty ]
