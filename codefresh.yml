@@ -39,5 +39,5 @@ steps:
   push-to-dockerhub:
     type: push
     candidate: ${{build_step}}
-    registry: docker-hub
+    registry: cfcr
     tags: [ ${{CF_BRANCH}}, qwerty ]
