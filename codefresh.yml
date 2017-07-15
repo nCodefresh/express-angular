@@ -4,15 +4,17 @@ steps:
     image: node:latest
     working-directory: ${{main_clone}}
     commands:
-      - cf_export TAG=qwerty=we TAG1='kskd=sd' TAG2=fhgjd USERNAME=ncodefresh 123=124
-      - echo TEST=123456789 >> /codefresh/volume/env_vars_to_export
-      - echo TEST1=12345678910 >> /codefresh/volume/env_vars_to_export
+      - echo test
+#      - cf_export TAG=qwerty=we TAG1='kskd=sd' TAG2=fhgjd USERNAME=ncodefresh 123=124
+#      - echo TEST=123456789 >> /codefresh/volume/env_vars_to_export
+#      - echo TEST1=12345678910 >> /codefresh/volume/env_vars_to_export
 
   alpine-freestyle-step:
       image: alpine
       commands:
-        - cf_export TAG_ALPINE=alpine
-        - echo TEST_APINE=17 >> ${{CF_VOLUME_PATH}}/env_vars_to_export
+        - echo test
+#        - cf_export TAG_ALPINE=alpine
+#        - echo TEST_APINE=17 >> ${{CF_VOLUME_PATH}}/env_vars_to_export
 
   build_step:
     type: build
@@ -23,7 +25,7 @@ steps:
     build_arguments:
       - arg=${{TEST_APINE}}
 
-  generate-tag-1:
+  print-tag:
       image: node:latest
       working-directory: ${{main_clone}}
       commands:
@@ -38,4 +40,4 @@ steps:
     type: push
     candidate: ${{build_step}}
     registry: docker-hub
-    tags: [ latest, qwerty ]
+    tags: [ ${{CF_BRANCH}}, qwerty ]
