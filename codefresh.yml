@@ -1,5 +1,14 @@
 version: '1.0'
 steps:
+  shallow_clone:
+    title: Create Shallow Clone
+    image: codefreshio/git-image:latest
+    commands:
+      - echo ${{CF_VOLUME_NAME}}
+      - echo ${{main_clone}}
+      - echo git clone --depth=1 'file://${{CF_VOLUME_NAME}}' '${{CF_VOLUME_NAME}}/shallow-clone'
+      - git clone --depth=1 'file://${{CF_VOLUME_NAME}}' '${{CF_VOLUME_NAME}}/shallow-clone'
+
   build_step:
     type: build
     image-name: ncodefresh/ncodefresh
