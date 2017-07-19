@@ -10,6 +10,7 @@ steps:
 #      - git clone --depth=1 'file://${{CF_VOLUME_PATH}}' '${{CF_VOLUME_PATH}}/shallow-clone'
 
 
+
   BuildingDockerImage:
     title: Building Docker Image
     type: build
