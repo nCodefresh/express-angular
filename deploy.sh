@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+cat /codefresh/volume/env_vars_to_export
 
 if [ "$CF_BRANCH" == "staging" ]
     then
