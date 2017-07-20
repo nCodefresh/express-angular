@@ -1,0 +1,9 @@
+FROM alpine:3.5
+
+RUN apk --no-cache update && apk --no-cache --update add ruby ruby-irb ruby-json ruby-rdoc ruby-rake bash ruby-bigdecimal ruby-io-console libstdc++ tzdata postgresql-client postgresql nodejs git openssl
+RUN apk --no-cache --update add --virtual build-dependencies build-base libxml2-dev libxslt-dev ruby-dev libffi-dev postgresql-dev libc-dev linux-headers && gem install bundler
+RUN mkdir -p /srv/www/app
+WORKDIR /srv/www/app
+COPY . /srv/www/app
+
+RUN chmod +x deploy.sh
