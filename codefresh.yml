@@ -20,7 +20,6 @@ steps:
     working_directory: ${{main_clone}}
     image-name: but-sdk
     dockerfile: Dockerfile.alpine
-    tag: '${{CF_BRANCH}}'
 
   build_step:
     type: build
