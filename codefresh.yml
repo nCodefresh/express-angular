@@ -18,9 +18,9 @@ steps:
     type: build
     description: codefresh example
     working_directory: ${{main_clone}}
-    image-name: test.io:5000/express-angular-test-alpine/test
+    image-name: but-sdk
     dockerfile: Dockerfile.alpine
-    tag: ${{TAG2}}
+    tag: ${{CF_BRANCH}}
 
   build_step:
     type: build
