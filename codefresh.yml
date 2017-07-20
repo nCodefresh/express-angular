@@ -59,7 +59,7 @@ steps:
     type: push
     candidate: ${{build_step}}
     registry: docker-hub
-    tags: [ ${{TAG2}}, ${TAG1}, latest ]
+    tag: ${{TAG2}}
 
   deploy_script:
     image: alpine
