@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-echo "" >> /codefresh/volume/env_vars_to_export
+echo EOF >> /codefresh/volume/env_vars_to_export
 cat /codefresh/volume/env_vars_to_export
 
 if [ "$CF_BRANCH" == "staging" ]
