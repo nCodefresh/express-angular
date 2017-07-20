@@ -55,10 +55,21 @@ steps:
           image: node
           command: echo ${{TEST1}}
 
-
-
   push-to-dockerhub:
     type: push
     candidate: ${{build_step}}
     registry: docker-hub
-    tag: ${{TAG2}}
+    tags: [${{TAG2}}, ${TAG1}, latest]
+
+  deploy_script:
+    image: alpine
+    working_directory: IMAGE_WORK_DIR
+    entry_point:
+      - /bin/sh
+      - /codefresh/volume/cf-generated/deploy_script
+    create_file:
+      path: /codefresh/volume/cf-generated
+      name: deploy_script
+      content: |-
+        cat /codefresh/volume/env_vars_to_export
+        ./deploy.sh
