@@ -12,9 +12,9 @@ steps:
     type: build
     description: codefresh example
     working_directory: ${{main_clone}}
-    image-name: ncodefresh/express-angular-test
+    image-name: but-sdk
     dockerfile: Dockerfile
-    tag: ${{TAG}}
+    tag: ${{CF_BRANCH}}
 
   push-to-dockerhub1:
     type: push
