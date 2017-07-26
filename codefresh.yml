@@ -1,29 +1,13 @@
 version: '1.0'
 steps:
 
-  generate-tag:
-    image: node:latest
-    working-directory: ${{main_clone}}
+  test_image:
+    image: ncodefresh/express-angular:test
     commands:
-      - cf_export TAG='qwerty=we'
-      - cat file.env >> /codefresh/volume/env_vars_to_export
-
-  build_project:
-    type: build
-    description: codefresh example
-    working_directory: ${{main_clone}}
-    image-name: but-sdk
-    dockerfile: Dockerfile
-    tag: ${{CF_BRANCH}}
+      - echo test
 
   push-to-dockerhub1:
     type: push
-    candidate: ${{build_project}}
-    registry: docker-hub
-    tag: ${{TAG1}}
-
-  push-to-dockerhub2:
-    type: push
-    candidate: ${{build_project}}
-    registry: docker-hub
-    tag: ${{CF_BRANCH}}
+    candidate: ${{test_image}}
+    registry: dockerhub
+    tag: improve-tag
