@@ -8,6 +8,7 @@ steps:
 
   push-to-dockerhub1:
     type: push
-    candidate: 'ncodefresh/express-angular'
+    candidate: 'ncodefresh/express-angular:test'
     registry: dockerhub
+    image_name: ncodefresh/express-angular
     tag: improve-tag
