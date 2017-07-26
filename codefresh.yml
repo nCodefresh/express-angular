@@ -1,10 +1,22 @@
 version: '1.0'
 steps:
 
+  build_step:
+    type: build
+    image_name: ncodefresh/express-angular
+    dockerfile: Dockerfile
+
   test_image:
     image: ncodefresh/express-angular:test
     commands:
       - echo test
+
+  verify_push:
+    type: push
+    candidate: ${{build_step}}
+    registry: dockerhub
+    image_name: ncodefresh/express-angular
+    tag: test
 
   push-to-dockerhub1:
     type: push
