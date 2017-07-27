@@ -16,11 +16,11 @@ steps:
     candidate: ${{build_step}}
     registry: dockerhub
     image_name: ncodefresh/express-angular
-    tag: test
+    tags: [ '${{CF_BRANCH}}', 'tag1' ]
 
-  push-to-dockerhub1:
-    type: push
-    candidate: 'ncodefresh/express-angular:test'
-    registry: dockerhub
-    image_name: ncodefresh/express-angular
-    tag: improve-tag
+#  push-to-dockerhub1:
+#    type: push
+#    candidate: 'ncodefresh/express-angular:test'
+#    registry: dockerhub
+#    image_name: ncodefresh/express-angular
+#    tag: improve-tag
