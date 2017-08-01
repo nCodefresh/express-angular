@@ -1,22 +1,48 @@
 version: '1.0'
 steps:
 
-  build_step:
+  BuildingDockerImage:
+    title: Building Docker Image
     type: build
-    image_name: ncodefresh/express-angular
+    image_name: ncodefresh/test-node-app
     dockerfile: Dockerfile
+    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
 
-  test_image:
-    image: ncodefresh/express-angular:test
-    commands:
-      - echo test
+#  test_image:
+#    image: ncodefresh/express-angular:test
+#    commands:
+#      - echo test
+#
+#  verify_push:
+#    type: push
+#    candidate: ${{build_step}}
+#    registry: dockerhub
+#    image_name: ncodefresh/express-angular
+#    tags: [ '${{CF_BRANCH}}', 'tag1' ]
 
-  verify_push:
+  PushingToDockerRegistry:
+    title: Pushing to Docker Registry
     type: push
-    candidate: ${{build_step}}
-    registry: dockerhub
-    image_name: ncodefresh/express-angular
-    tags: [ '${{CF_BRANCH}}', 'tag1' ]
+    when:
+      branch:
+        only:
+          - push-step
+    candidate: '${{BuildingDockerImage}}'
+    tags:
+      - 'latest'
+      - 'dev-${{CF_SHORT_REVISION}}'
+    registry: ecr
+
+#  push_to_registry:
+#    title: Pushing to Docker Registry development version
+#    type: push
+#    candidate: '${{build_image}}'
+#    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+#    registry: ecr
+#    when:
+#      condition:
+#          all:
+#            masterBranch: '"${{CF_BRANCH}}" != "master"'
 
 #  push-to-dockerhub1:
 #    type: push
