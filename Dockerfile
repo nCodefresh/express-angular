@@ -1,4 +1,4 @@
-FROM node:latest
+FROM ncodefresh/express-docker-from:dockerfile-from
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
