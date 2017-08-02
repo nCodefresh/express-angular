@@ -1,29 +1,52 @@
 version: '1.0'
 steps:
 
-  generate-tag:
-    image: node:latest
-    working-directory: ${{main_clone}}
-    commands:
-      - cf_export TAG='qwerty=we'
-      - cat file.env >> /codefresh/volume/env_vars_to_export
-
-  build_project:
+  BuildingDockerImage:
+    title: Building Docker Image
     type: build
-    description: codefresh example
-    working_directory: ${{main_clone}}
-    image-name: but-sdk
+    image_name: ncodefresh/test-node-app
     dockerfile: Dockerfile
-    tag: ${{CF_BRANCH}}
+    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
 
-  push-to-dockerhub1:
-    type: push
-    candidate: ${{build_project}}
-    registry: docker-hub
-    tag: ${{TAG1}}
+#  test_image:
+#    image: ncodefresh/express-angular:test
+#    commands:
+#      - echo test
+#
+#  verify_push:
+#    type: push
+#    candidate: ${{build_step}}
+#    registry: dockerhub
+#    image_name: ncodefresh/express-angular
+#    tags: [ '${{CF_BRANCH}}', 'tag1' ]
 
-  push-to-dockerhub2:
+  PushingToDockerRegistry:
+    title: Pushing to Docker Registry
     type: push
-    candidate: ${{build_project}}
-    registry: docker-hub
-    tag: ${{CF_BRANCH}}
+    when:
+      branch:
+        only:
+          - push-step
+    candidate: '${{BuildingDockerImage}}'
+    tags:
+      - 'latest'
+      - 'dev-${{CF_SHORT_REVISION}}'
+    registry: ecr
+
+#  push_to_registry:
+#    title: Pushing to Docker Registry development version
+#    type: push
+#    candidate: '${{build_image}}'
+#    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+#    registry: ecr
+#    when:
+#      condition:
+#          all:
+#            masterBranch: '"${{CF_BRANCH}}" != "master"'
+
+#  push-to-dockerhub1:
+#    type: push
+#    candidate: 'ncodefresh/express-angular:test'
+#    registry: dockerhub
+#    image_name: ncodefresh/express-angular
+#    tag: improve-tag
