@@ -14,6 +14,8 @@ COPY files/credimiworkflows_2.11-*.test /usr/src/app/credimiworkflows.test
 
 RUN ls -l
 
+
+
 EXPOSE 9000
 
 CMD [ "npm", "start" ]
