@@ -1,1 +1,1 @@
-FROM ncodefresh123/express-docker-from:dockerfile-from
+FROM r.cfcr.io/nikolai/ncodefresh123/express-docker-fro:dockerfile-from
