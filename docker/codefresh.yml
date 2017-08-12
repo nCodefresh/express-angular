@@ -1,0 +1,53 @@
+version: '1.0'
+steps:
+
+  BuildingDockerImage:
+    title: Building Docker Image
+    type: build
+    image_name: ncodefresh/test-node-app
+    dockerfile: Dockerfile
+    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
+
+#  test_image:
+#    image: ncodefresh/docker-spring
+#    commands:
+#      - echo test
+#      - ls -l
+#
+#  verify_push:
+#    type: push
+#    candidate: ${{build_step}}
+#    registry: dockerhub
+#    image_name: ncodefresh/express-angular
+#    tags: [ '${{CF_BRANCH}}', 'tag1' ]
+
+#  PushingToDockerRegistry:
+#    title: Pushing to Docker Registry
+#    type: push
+#    when:
+#      branch:
+#        only:
+#          - push-step
+#    candidate: '${{BuildingDockerImage}}'
+#    tags:
+#      - 'latest'
+#      - 'dev-${{CF_SHORT_REVISION}}'
+#    registry: ecr
+
+#  push_to_registry:
+#    title: Pushing to Docker Registry development version
+#    type: push
+#    candidate: '${{build_image}}'
+#    tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+#    registry: ecr
+#    when:
+#      condition:
+#          all:
+#            masterBranch: '"${{CF_BRANCH}}" != "master"'
+
+#  push-to-dockerhub1:
+#    type: push
+#    candidate: 'ncodefresh/express-angular:test'
+#    registry: dockerhub
+#    image_name: ncodefresh/express-angular
+#    tag: improve-tag
