@@ -9,7 +9,7 @@ steps:
 #    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
 
   test_image:
-    image: 839151377425.dkr.ecr.eu-west-1.amazonaws.com/ncodefresh/docker-spring
+    image: ncodefresh/docker-spring
     commands:
       - echo test
       - ls -l
