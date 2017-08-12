@@ -1,17 +1,18 @@
 version: '1.0'
 steps:
 
-  BuildingDockerImage:
-    title: Building Docker Image
-    type: build
-    image_name: ncodefresh/test-node-app
-    dockerfile: Dockerfile
-    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
+#  BuildingDockerImage:
+#    title: Building Docker Image
+#    type: build
+#    image_name: ncodefresh/test-node-app
+#    dockerfile: Dockerfile
+#    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
 
-#  test_image:
-#    image: ncodefresh/express-angular:test
-#    commands:
-#      - echo test
+  test_image:
+    image: 839151377425.dkr.ecr.eu-west-1.amazonaws.com/ncodefresh/docker-spring
+    commands:
+      - echo test
+      - ls -l
 #
 #  verify_push:
 #    type: push
@@ -20,18 +21,18 @@ steps:
 #    image_name: ncodefresh/express-angular
 #    tags: [ '${{CF_BRANCH}}', 'tag1' ]
 
-  PushingToDockerRegistry:
-    title: Pushing to Docker Registry
-    type: push
-    when:
-      branch:
-        only:
-          - push-step
-    candidate: '${{BuildingDockerImage}}'
-    tags:
-      - 'latest'
-      - 'dev-${{CF_SHORT_REVISION}}'
-    registry: ecr
+#  PushingToDockerRegistry:
+#    title: Pushing to Docker Registry
+#    type: push
+#    when:
+#      branch:
+#        only:
+#          - push-step
+#    candidate: '${{BuildingDockerImage}}'
+#    tags:
+#      - 'latest'
+#      - 'dev-${{CF_SHORT_REVISION}}'
+#    registry: ecr
 
 #  push_to_registry:
 #    title: Pushing to Docker Registry development version
