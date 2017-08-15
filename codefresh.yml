@@ -11,11 +11,11 @@ steps:
   alpine-freestyle-step:
       image: alpine
       commands:
-        - echo test
+        - echo test ${TEST1}
       when:
         condition:
           all:
-            promoted: "'${{TEST1}}' == '12345678910'"
+            promoted: "'${TEST1}' == '12345678910'"
             masterBranch: '"${{CF_BRANCH}}" == "master"'
 
 #  build_step_alpine:
