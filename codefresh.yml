@@ -8,6 +8,11 @@ steps:
       - echo TEST=123456789 >> /codefresh/volume/env_vars_to_export
       - echo TEST1=12345678910 >> /codefresh/volume/env_vars_to_export
 
+  alpine-freestyle-step1:
+        image: alpine
+        commands:
+          - echo test ${TEST1}
+
   alpine-freestyle-step:
       image: alpine
       commands:
