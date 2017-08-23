@@ -8,6 +8,8 @@ steps:
     dockerfile: Dockerfile
     tags: [ '${{CF_BRANCH_TAG_NORMALIZED}}', 'latest' ]
 
+
+
 #  test_image:
 #    image: ncodefresh/express-angular:test
 #    commands:
