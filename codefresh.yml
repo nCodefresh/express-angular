@@ -23,6 +23,7 @@ steps:
             promoted: "'${{TEST1}}' == '12345678910'"
             masterBranch: '"${{CF_BRANCH}}" == "release/rc-1.0.2"'
 
+
 #  build_step_alpine:
 #    type: build
 #    description: codefresh example
